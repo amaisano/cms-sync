@@ -5,7 +5,7 @@
 
 # login to Terminus
 echo -e "\nLogging into Terminus..."
-terminus auth:login --machine-token=${PANTHEON_MACHINE_TOKEN} >/dev/null 2>&1
+terminus auth:login --machine-token=${PANTHEON_MACHINE_TOKEN}
 
 # bail on errors
 set +ex
