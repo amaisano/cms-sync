@@ -3,12 +3,12 @@
 # Requires a machine token generated from Pantheon and passed as an envar
 # - See https://pantheon.io/docs/machine-tokens
 
+# bail on errors
+set -e
+
 # login to Terminus
 echo -e "\nLogging into Terminus..."
 terminus auth:login --machine-token=${PANTHEON_MACHINE_TOKEN}
-
-# bail on errors
-set +ex
 
 # backup test prior to sync
 echo -e "\nBacking up test site..."
