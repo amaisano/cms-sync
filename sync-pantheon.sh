@@ -18,12 +18,24 @@ terminus backup:create mbta.test
 echo -e "\nCloning live site to test..."
 terminus env:clone-content -v -y --cc mbta.live test
 
+# keep the test site configuration in sync with
+# the commit currently deployed to test
+terminus drush mbta.test -- cim -y
+terminus drush mbta.test -- updb -y
+terminus drush mbta.test -- cr
+
 # dev does not need an on-demand backup,
 # plus it has daily, scheduled backups
 
 # clone database and files to dev
 echo -e "\nCloning test site to dev..."
 terminus env:clone-content -v -y --cc mbta.test dev
+
+# keep the dev site configuration in sync with
+# the commit currently deployed to dev
+terminus drush mbta.dev -- cim -y
+terminus drush mbta.dev -- updb -y
+terminus drush mbta.dev -- cr
 
 # backup sandbox DB prior to sync
 echo -e "\nBacking up sandbox database..."
